@@ -1,5 +1,29 @@
-Flight simulator. Write a code in python that simulates the tilt correction of the plane (angle between plane wings and earth). 
-The program should print out current orientation, and applied tilt correction. 
-The program should run in infinite loop, until user breaks the loop. 
-Assume that plane orientation in every new simulation step is random angle with gaussian distribution (the planes is experiencing "turbulations"). 
-With every simulation step the orentation should be corrected, applied and printed out.
+import random
+import time
+current_tilt = 0
+max_correction = 10
+correction = 0
+
+def get_new_angle(current_tilt):
+	new_angle = random.gauss(0, 30)
+	current_tilt = current_tilt + new_angle
+	return current_tilt
+
+def get_correction(current_tilt):
+	if abs(current_tilt) > max_correction:
+		correction = max_correction
+		if current_tilt > 0:
+			current_tilt = current_tilt - max_correction
+		else:
+			current_tilt = current_tilt + max_correction
+	else:
+		correction = 0 - current_tilt
+		current_tilt = 0
+	return correction
+
+while True:
+	current_tilt = get_new_angle(current_tilt)
+	print "Current tilt = " + str(current_tilt)
+	correction = get_correction(current_tilt)
+	print "Tilt correction = " + str(correction)	
+	time.sleep(0.5)

@@ -5,7 +5,7 @@ class Plane:
     correction = 0
 
     def print_current_tilt(self):
-        print "Current tilt = " + str(self.current_tilt)
+        print "Current tilt {}".format(self.current_tilt)
 
     def apply_new_tilt(self, tilt):
         self.current_tilt += tilt
